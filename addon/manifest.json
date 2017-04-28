@@ -1,0 +1,28 @@
+{
+
+  "manifest_version": 2,
+  "name": "tabDance",
+  "version": "1.0",
+
+  "description": "Synchronize Tabs between different firefox instances using your own server.",
+  "icons": {
+    "48": "icons/sync-48.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/sync-32.png",
+    "default_title": "Sync",
+    "default_popup": "popup/popup.html"
+  },
+
+  "options_ui": {
+    "page": "settings/options.html"
+  }
+
+}
