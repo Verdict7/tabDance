@@ -19,8 +19,9 @@ import           Database.Persist.TH
 import           Data.Aeson
 import           GHC.Generics
 import           Control.Monad
+import           Data.Time.Clock
 
-type Timestamp = String
+type Timestamp = UTCTime
 
 share [ mkPersist sqlSettings
       , mkDeleteCascade sqlSettings
@@ -30,6 +31,8 @@ Tab
     url String
     position Int
     timestamp Timestamp
+    UniquePosition position
+    UniqueTimestamp timestamp
     deriving Show Eq Generic
 |]
 
