@@ -3,7 +3,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE FlexibleContexts           #-}
+
 {-# LANGUAGE FlexibleInstances          #-}
 
 module TabDance
@@ -42,13 +42,6 @@ import           System.Environment
 
 
 
-
---runDb ::
-runDb :: (MonadReader Config m, MonadIO m) => SqlPersistT IO b -> m b
-runDb query = do
---    config <- asks getConfig
-  pool <- asks confPool
-  liftIO $ runSqlPool query $ pool
 
 type UsersAPI =
   "v1" :> "tabs" :> Get '[JSON] [Tab]

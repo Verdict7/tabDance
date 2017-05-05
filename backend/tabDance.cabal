@@ -39,6 +39,7 @@ library
                      , monad-logger
                      , bytestring
                      , mtl
+                     , time
 
 
   default-language:    Haskell2010
