@@ -1,1 +1,41 @@
-# tabDance
+
+
+
+
+* TabDance Backend
+
+A server for storing tabs opened in a browser
+
+** Installation
+
+#+CAPTION: Arch-Linux, dependencies
+#+BEGIN_SRC shell-script
+sudo pacman -S postgresql postgresql-lib stack
+#+END_SRC
+
+#+BEGIN_SRC shell-script
+stack setup
+stack build
+#+END_SRC
+
+
+A postgres user and a database must be created. The database access
+data can be put into a configuration file, named =tabDance.conf=. This
+file must lie within the directory in which the programm is executed.
+The format for the configuration file can be seen in =tabDance.conf.example=.
+
+#+BEGIN_SRC shell-script
+stack setup
+stack build
+#+END_SRC
+
+** Execute
+
+#+BEGIN_SRC shell-script
+stack exec tabDance-exe
+#+END_SRC
+
+On the first run the programm might print SQL-Queries needed to set up
+the database.
+
+
