@@ -10,7 +10,6 @@ var onReady = function(tabs){
     dataType: "json",
     type : "GET",
     success : function(r) {
-      console.log(r);
       deleteTabs(r);
     }
   });
@@ -59,10 +58,9 @@ var addNewTabs = function(res){
 		type:"POST",
 		data:JSON.stringify(data),
 		contentType:"application/json; charset=utf-8",
-		dataType:"json",
+		dataType:"html",
 		success: function(){
       console.log("Finished Post");
-      console.log();
 		}
 	})
 }
@@ -70,10 +68,9 @@ var addNewTabs = function(res){
 
 var results;
 var tabList;
-var onErr = function(err){console.log("Some Err"); console.log(err); };
+var onErr = function(err){console.log(err); };
 var onStorageReady = function(result){
   results = result;
-  console.log(result);
   var text = browser.tabs.query({});
   text.then(onReady, onErr);
   if(result.website){
@@ -87,7 +84,7 @@ var onStorageReady = function(result){
     });
     */
   } else {
-    console.log("Site is missing!");
+    console.log("No website specified in settings (or not found in local storage)!");
   }
 };
 /*
