@@ -1,25 +1,8 @@
 var onReady = function(tabs){
-  console.log("Test");
-  console.log(tabs);
+  //Save tabs locally
+  //TODO: Maybe not globally
   tabList = tabs;
 
-  //Test Post request
-  var url = results.website + "tabs";
-  var data = [{ url : "facebook.com", timestamp : ((new Date()).toISOString()), position : 2}];
-
-/*
-	$.ajax({
-		url:url,
-		type:"POST",
-		data:JSON.stringify(data),
-		contentType:"application/json; charset=utf-8",
-		dataType:"json",
-		success: function(){
-      console.log("Finished Post");
-      console.log(result);
-		}
-	})
-*/
 	//First get all tabs from server.
 	$.ajax({
     url: results.website + "tabs",
@@ -35,7 +18,6 @@ var onReady = function(tabs){
 
 //Deletes all tabs from server and initializes merge
 var deleteTabs = function(tabs){
-  console.log("Entering Delete");
   var timestamps = [];
   for(var i = 0; i < tabs.length; i ++){
     var isNew = true;
@@ -45,8 +27,6 @@ var deleteTabs = function(tabs){
       }
     }
     if(isNew){//Open in browser
-      //tabs[i].index = tabList.length;
-      //tabList.push(tabs[i]);
       var creating = browser.tabs.create({url: tabs[i].url, active : false});
       creating.then(function(tab){console.log("Opened new tab: " + tab.id + "!");}, function(err){console.log(err);});
 
@@ -67,15 +47,12 @@ var deleteTabs = function(tabs){
 
 //Adds all the new tabs
 var addNewTabs = function(res){
-  console.log("Entering add");
-  console.log(tabList);
   var data = [];
   var date = new Date();
   var buffer;
   for(var i = 0; i < tabList.length;i++){
     buffer = new Date(date.getTime() + i);
     data.push({url : tabList[i].url, timestamp : (buffer.toISOString()), position : tabList[i].index});
-    console.log(data[i]);
   }
 	$.ajax({
 		url:results.website + "tabs",
@@ -103,6 +80,7 @@ var onStorageReady = function(result){
     var url = result.website + "tabs";
     console.log("Accessing URL: " + url);
     /*
+    //Shorter version for get
     $.get(url, function(data){
       console.log("Received data");
       console.log(data);
@@ -118,13 +96,8 @@ Listen for clicks in the popup.
 
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("sync")) {
-    /*
-    var text = browser.tabs.query({});
-    text.then(onReady, onErr);
-    */
     //Test local storage for settings
     var getting = browser.storage.local.get(["website","filter"]);
     getting.then(onStorageReady, onErr);
   }
 });
-
