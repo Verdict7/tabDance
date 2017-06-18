@@ -27,7 +27,7 @@
   },
 
 	"background": {
-		"scripts": ["background_scripts/init.js"]
+    "page": "background_scripts/background-page.html"
 	}
 
 }
